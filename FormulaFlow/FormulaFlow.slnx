@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="formulaflow.client/formulaflow.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="FormulaFlow.Server/FormulaFlow.Server.csproj" />
+</Solution>
