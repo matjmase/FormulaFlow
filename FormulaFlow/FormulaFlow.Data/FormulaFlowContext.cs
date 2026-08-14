@@ -11,7 +11,12 @@ namespace FormulaFlow.Data
             : base(options)
         {
         }
+
         public DbSet<StockSymbol> StockSymbols { get; set; }
+        public DbSet<NetworkCanvas> Canvases { get; set; }
+        public DbSet<NetworkCard> Cards { get; set; }
+        public DbSet<NetworkCardToNetworkCard> CardsToCards { get; set; }
+        public DbSet<NetworkParameter> Parameters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
