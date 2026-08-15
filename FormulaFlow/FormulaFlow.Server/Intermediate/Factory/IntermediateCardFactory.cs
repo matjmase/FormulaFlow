@@ -1,4 +1,5 @@
 ﻿using FormulaFlow.Data.Enum;
+using FormulaFlow.Server.Intermediate.Model.Card;
 using FormulaFlow.Server.Intermediate.Model.Card.Base;
 
 namespace FormulaFlow.Server.Intermediate.Factory
@@ -10,6 +11,10 @@ namespace FormulaFlow.Server.Intermediate.Factory
         {
             switch (type)
             {
+                case NetworkCardType.DataSource:
+                    return new DataSourceIntermediateCard();
+                case NetworkCardType.FeedbackNumber:
+                    return new NumberFeedbackIntermediateCard();    
                 default:
                     throw new NotImplementedException();
             }
@@ -19,6 +24,8 @@ namespace FormulaFlow.Server.Intermediate.Factory
         {
             return new IntermediateCard[]
             {
+                new DataSourceIntermediateCard(),   
+                new NumberFeedbackIntermediateCard(),
             };
         }
     }

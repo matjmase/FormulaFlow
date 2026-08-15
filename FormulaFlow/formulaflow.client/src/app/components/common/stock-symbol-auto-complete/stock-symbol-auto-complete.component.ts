@@ -65,7 +65,7 @@ export class StockSymbolAutoCompleteComponent
   }
 
   private getStockSymbols() {
-    this.symbolService.getPaged(1, 100).subscribe((values) => {
+    this.symbolService.getPaged(0, 100).subscribe((values) => {
       this.options = values.record;
     });
   }
