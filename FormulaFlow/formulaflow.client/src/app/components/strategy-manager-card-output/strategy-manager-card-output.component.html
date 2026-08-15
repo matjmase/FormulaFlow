@@ -1,1 +1,11 @@
-<p>strategy-manager-card-output works!</p>
+<button
+  #connectButton
+  [ngStyle]="{
+    'background-color': model.outputType === noOutput ? 'red' : 'lightskyblue',
+  }"
+  mat-icon-button
+  (click)="connectInput()"
+  (contextmenu)="removeConnectInput()"
+>
+  <app-strategy-manager-card-io-icon [CardIoDataType]="model.outputType" />
+</button>

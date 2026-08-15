@@ -1,0 +1,23 @@
+<form style="display: flex">
+  <mat-form-field class="flex-expand">
+    <mat-label>Stock Symbol</mat-label>
+    <input
+      type="text"
+      placeholder="Pick one"
+      aria-label="Stock Symbol"
+      name="autoComplete"
+      matInput
+      [formControl]="myControl"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete
+      [displayWith]="displayForStockSymbol"
+      autoActiveFirstOption
+      #auto="matAutocomplete"
+    >
+      @for (option of filteredOptions | async; track option) {
+        <mat-option [value]="option">{{ option?.symbol }}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

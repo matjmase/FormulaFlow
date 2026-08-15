@@ -1,0 +1,58 @@
+.spacer {
+  flex-grow: 1;
+}
+
+.tall-form-field {
+  margin-top: 2rem;
+}
+
+.double-button {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  width: 48px;
+  overflow: hidden;
+  transition:
+    width 200ms ease,
+    gap 200ms ease;
+  gap: 0;
+
+  &:hover {
+    width: 160px;
+    gap: 0.5rem;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      padding: 0 1rem 0 0.5rem;
+    }
+  }
+
+  button {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+    pointer-events: none;
+  }
+
+  &:hover button,
+  &:focus-within button {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+.row-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-expand {
+  flex-grow: 1;
+}

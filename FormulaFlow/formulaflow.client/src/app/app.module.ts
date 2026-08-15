@@ -53,6 +53,7 @@ import { StrategyManagerParameterComponent } from './components/strategy-manager
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticatedIfDirective } from './directives/authenticated-if.directive';
 import { AuthorizedIfDirective } from './directives/authorized-if.directive';
+import { StockSymbolAutoCompleteComponent } from './components/common/stock-symbol-auto-complete/stock-symbol-auto-complete.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { AuthorizedIfDirective } from './directives/authorized-if.directive';
     StrategyManagerParameterComponent,
     AuthenticatedIfDirective,
     AuthorizedIfDirective,
+    StockSymbolAutoCompleteComponent,
   ],
   imports: [
     BrowserModule,

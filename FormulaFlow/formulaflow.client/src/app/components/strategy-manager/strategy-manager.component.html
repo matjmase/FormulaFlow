@@ -1,1 +1,53 @@
-<p>strategy-manager works!</p>
+<mat-card class="basic-card">
+  <mat-card-header>
+    <div class="flex-expand">
+      <mat-card-title class="spacer">Strategy List</mat-card-title>
+      <button mat-flat-button color="primary" (click)="addNew()">
+        Add New
+      </button>
+    </div>
+  </mat-card-header>
+
+  @if (!loading) {
+    <mat-list>
+      @for (item of items; track $index; let last = $last) {
+        <mat-list-item>
+          <div class="symbol-row">
+            <div class="symbol-text">{{ item.name }}</div>
+            <div class="spacer"></div>
+            <button
+              mat-icon-button
+              aria-label="Navigate"
+              [routerLink]="['/strategy-manager/canvas', item.id]"
+            >
+              <mat-icon>navigation</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              aria-label="Delete"
+              (click)="delete(item)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </mat-list-item>
+
+        <mat-divider *ngIf="!last"></mat-divider>
+      }
+    </mat-list>
+  }
+
+  @if (loading) {
+    <div class="loading-placeholder">Loading...</div>
+  }
+
+  <mat-paginator
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageIndex]="page - 1"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    (page)="pageChange($event)"
+  >
+  </mat-paginator>
+</mat-card>

@@ -1,1 +1,63 @@
-<p>strategy-manager-canvas-side-toolbar works!</p>
+<div class="flex-vertical">
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label><mat-icon>login</mat-icon> Input </mat-label>
+    <mat-select
+      [(ngModel)]="inputFilter"
+      (ngModelChange)="selectionFilterChanged()"
+    >
+      <mat-select-trigger>
+        @if (inputFilter) {
+          <app-strategy-manager-card-io-icon
+            [CardIoDataType]="inputFilter"
+          /><app-strategy-manager-card-io-label
+            [cardIoDataType]="inputFilter"
+          />
+        }
+      </mat-select-trigger>
+
+      <mat-option [value]="undefined">Clear</mat-option>
+      <mat-option *ngFor="let input of logicModuleInputs" [value]="input">
+        <app-strategy-manager-card-io-icon
+          [CardIoDataType]="input" /><app-strategy-manager-card-io-label
+          [cardIoDataType]="input"
+      /></mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label><mat-icon>logout</mat-icon> Output</mat-label>
+    <mat-select
+      [(ngModel)]="outputFilter"
+      (ngModelChange)="selectionFilterChanged()"
+    >
+      <mat-select-trigger>
+        @if (outputFilter) {
+          <app-strategy-manager-card-io-icon
+            [CardIoDataType]="outputFilter"
+          /><app-strategy-manager-card-io-label
+            [cardIoDataType]="outputFilter"
+          />
+        }
+      </mat-select-trigger>
+
+      <mat-option [value]="undefined">Clear</mat-option>
+      <mat-option *ngFor="let output of logicModuleOutputs" [value]="output">
+        <app-strategy-manager-card-io-icon [CardIoDataType]="output" />
+        <app-strategy-manager-card-io-label [cardIoDataType]="output"
+      /></mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  @for (card of cardCatalog; track card) {
+    <div class="card-catalog-holder" (click)="cardClicked(card)">
+      <span class="flex-vertical">
+        <app-strategy-manager-card-io-icon [CardIoDataType]="card.input!" />
+      </span>
+      <span class="card-center-text">
+        {{ card.label }}
+      </span>
+      <span>
+        <app-strategy-manager-card-io-icon [CardIoDataType]="card.output!" />
+      </span>
+    </div>
+  }
+</div>

@@ -1,1 +1,81 @@
-<p>strategy-manager-canvas works!</p>
+<mat-card class="stretch-vertical">
+  <mat-card-content>
+    <app-strategy-manager-canvas-top-toolbar
+      (submitCallback)="onSubmit()"
+      (zoomInCallback)="zoomIn()"
+      (zoomOutCallback)="zoomOut()"
+      (enlargeXCallback)="enlargeX()"
+      (shrinkXCallback)="shrinkX()"
+      (enlargeYCallback)="enlargeY()"
+      (shrinkYCallback)="shrinkY()"
+      [(canvasName)]="canvas.name"
+      [(startDate)]="startDate"
+      [(endDate)]="endDate"
+    ></app-strategy-manager-canvas-top-toolbar>
+    <div style="min-height: 0">
+      <div style="display: flex; flex-direction: row; height: 100%">
+        <div class="stretch-vertical canvas-toolbar">
+          <app-strategy-manager-canvas-side-toolbar
+            (cardSelected)="instantiateCard($event)"
+          ></app-strategy-manager-canvas-side-toolbar>
+        </div>
+        <div
+          class="canvas-holder"
+          (scroll)="captureScrollPosition($event)"
+          (elementResize)="captureCanvasResize($event)"
+        >
+          <div
+            [style.height.px]="canvas.height * canvas.scale"
+            [style.width.px]="canvas.width * canvas.scale"
+          >
+            <div
+              class="display-canvas"
+              #mainCanvas
+              (mousemove)="canvasMouseMove($event, mainCanvas)"
+              (mousedown)="canvasMouseDown($event)"
+              [style.height.px]="canvas.height"
+              [style.width.px]="canvas.width"
+              [style.left.px]="adjustedPositionX()"
+              [style.top.px]="adjustedPositionY()"
+              [style.scale]="canvas.scale"
+              (contextmenu)="onContextMenu($event)"
+            >
+              <app-strategy-manager-canvas-arrow
+                [proposedConnection]="model.proposedConnection"
+                [connections]="model.getConnectors()"
+              ></app-strategy-manager-canvas-arrow>
+
+              @for (card of canvas.cards; track card) {
+                <div
+                  #myCard
+                  class="shrink-container absolute-location"
+                  [style.top.px]="card.top"
+                  [style.left.px]="card.left"
+                >
+                  <app-strategy-manager-card
+                    class="shrink-container"
+                    [model]="card"
+                    [initialized]="initialized"
+                    (closeEvent)="closeCard($event)"
+                    (connectEvent)="connectItem(card, $event)"
+                    (removeConnectEvent)="removeConnectItem(card, $event)"
+                    (mouseDownEvent)="mouseDown($event, myCard)"
+                    (mouseUpEvent)="mouseUp()"
+                    (mouseLeaveEvent)="mouseLeave($event, myCard, card)"
+                    (mouseMoveDragEvent)="mouseMoveDrag($event, myCard, card)"
+                    (inputAdded)="inputAdded($event)"
+                    (inputRemoved)="inputRemoved($event)"
+                    (outputAdded)="outputAdded($event)"
+                    (outputRemoved)="outputRemoved($event)"
+                    (backTestEvent)="getBackTest($event)"
+                    (dirtyEvent)="setDirty()"
+                  ></app-strategy-manager-card>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

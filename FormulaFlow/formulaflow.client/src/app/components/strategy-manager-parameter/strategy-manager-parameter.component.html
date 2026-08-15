@@ -1,1 +1,37 @@
-<p>strategy-manager-parameter works!</p>
+@if (model.toolTip) {
+  <button
+    style="white-space: pre-line"
+    mat-icon-button
+    tabindex="-1"
+    [matTooltip]="model.toolTip"
+    matTooltipPosition="left"
+    matTooltipClass="my-tooltip"
+    matTooltipPosition="above"
+    aria-hidden="true"
+  >
+    <mat-icon>info</mat-icon>
+  </button>
+}
+
+@switch (model.type) {
+  @case (stockSourceType) {
+    <app-stock-symbol-auto-complete
+      [ngModel]="selectedSymbol"
+      (symboldIdChanged)="stockSymbolIdConverter($event); setDirty()"
+    ></app-stock-symbol-auto-complete>
+  }
+
+  @default {
+    <mat-form-field class="wide-text-area-header">
+      <mat-label>
+        {{ model.description }}
+      </mat-label>
+      <textarea
+        matInput
+        required
+        [(ngModel)]="model.value"
+        (ngModelChange)="setDirty()"
+      ></textarea>
+    </mat-form-field>
+  }
+}

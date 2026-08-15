@@ -1,1 +1,13 @@
-<p>strategy-manager-card-io-icon works!</p>
+<span class="vertical-middle">
+  @switch (CardIoDataType) {
+    @case (noneInput) {
+      <mat-icon>close</mat-icon>
+    }
+    @case (boolInput) {
+      <mat-icon>check_box</mat-icon>
+    }
+    @case (numberInput) {
+      <mat-icon>tag</mat-icon>
+    }
+  }
+</span>

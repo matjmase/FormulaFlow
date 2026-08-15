@@ -1,0 +1,68 @@
+@use "../../../variables";
+
+:host {
+  display: block;
+}
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.flex-expand {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+mat-list {
+  flex: 1 1 auto;
+}
+
+/* Small border around the list */
+mat-list {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 4px;
+  overflow: hidden;
+  background-color: var(--mat-sys-surface);
+}
+
+.symbol-row {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+
+  padding: 8px 16px;
+}
+
+.symbol-text {
+  font-weight: 500;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.loading-placeholder {
+  padding: 16px;
+}
+
+mat-paginator {
+  align-self: stretch;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.basic-card {
+  margin: variables.$standardMargin 0;
+  padding: variables.$standardMargin;
+}
+
+mat-card-header {
+  margin-bottom: variables.$standardMargin;
+}

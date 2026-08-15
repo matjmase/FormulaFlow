@@ -1,0 +1,66 @@
+@use "../../../variables";
+
+$cornerRadius: 20px;
+
+.node-card {
+  width: 500px;
+  border-radius: $cornerRadius;
+  background-color: var(--surface) !important;
+}
+
+.wide-text-area-header {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 0.5rem;
+}
+
+.card-close-header {
+  display: flex;
+  height: 3.5rem;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+::ng-deep .mdc-button__label {
+  z-index: 0 !important;
+}
+
+.card-handle {
+  background-color: var(--light);
+  border-top-right-radius: $cornerRadius;
+  border-top-left-radius: $cornerRadius;
+
+  padding: calc($cornerRadius / 2);
+
+  margin-bottom: 2rem;
+}
+
+.red-button {
+  color: red;
+}
+
+.card-item-bottom-margin {
+  margin-bottom: 0.5rem;
+}
+
+.card-content-centered {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.width-fill {
+  width: 100%;
+}
+
+.option-block {
+  display: block;
+}
+
+.underline-label {
+  text-decoration: underline;
+}

@@ -1,1 +1,81 @@
-<p>strategy-manager-canvas-top-toolbar works!</p>
+<mat-toolbar>
+  <div style="display: flex">
+    <span class="double-button">
+      <span>
+        <mat-icon matPrefix matTooltip="Zoom"> search </mat-icon>
+      </span>
+      <button mat-icon-button (click)="zoomOut()">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <button mat-icon-button (click)="zoomIn()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </span>
+
+    <span class="double-button">
+      <span>
+        <mat-icon matPrefix matTooltip="Width"> width_wide </mat-icon>
+      </span>
+      <button mat-icon-button (click)="shrinkX()">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <button mat-icon-button (click)="enlargeX()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </span>
+
+    <span class="double-button">
+      <span>
+        <mat-icon matPrefix matTooltip="Height"> line_weight </mat-icon>
+      </span>
+      <button mat-icon-button (click)="shrinkY()">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <button mat-icon-button (click)="enlargeY()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </span>
+  </div>
+  <span class="spacer"></span>
+
+  <mat-form-field appearance="outline" class="tall-form-field">
+    <mat-label>Network Name</mat-label>
+    <input matInput [(ngModel)]="canvasNameField" />
+  </mat-form-field>
+
+  <button mat-button (click)="onSubmit()">Submit</button>
+</mat-toolbar>
+<mat-toolbar>
+  <span class="spacer"></span>
+
+  <div class="row-flex">
+    <form>
+      <mat-form-field subscriptSizing="dynamic" class="flex-expand">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input
+            id="startDate"
+            name="startDate"
+            matStartDate
+            placeholder="Start date"
+            [(ngModel)]="startDateField"
+          />
+          <input
+            id="endDate"
+            name="endDate"
+            matEndDate
+            placeholder="End date"
+            [(ngModel)]="endDateField"
+          />
+        </mat-date-range-input>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <span class="spacer"></span>
+</mat-toolbar>
