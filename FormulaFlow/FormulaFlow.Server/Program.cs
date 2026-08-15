@@ -144,7 +144,7 @@ using (var scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         var loggerFactory = services.GetService<ILoggerFactory>();
-        var logger = loggerFactory?.CreateLogger("StockHub.Data.Migrations");
+        var logger = loggerFactory?.CreateLogger("FormulaFlow.Data.Migrations");
         logger?.LogError(ex, "An error occurred while migrating the database.");
         Console.WriteLine($"An error occurred while migrating the database: {ex.Message}");
         throw;
