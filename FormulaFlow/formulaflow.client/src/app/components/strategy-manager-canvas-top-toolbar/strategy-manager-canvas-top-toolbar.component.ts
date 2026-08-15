@@ -25,28 +25,6 @@ export class StrategyManagerCanvasTopToolbarComponent {
     this.canvasNameChange.emit(value);
   }
 
-  @Input() public startDate: Date | undefined;
-  @Output() public startDateChange = new EventEmitter<Date>();
-
-  public get startDateField(): Date | undefined {
-    return this.startDate;
-  }
-  public set startDateField(value: Date | undefined) {
-    this.startDate = value;
-    this.startDateChange.emit(value);
-  }
-
-  @Input() public endDate: Date | undefined;
-  @Output() public endDateChange = new EventEmitter<Date>();
-
-  public get endDateField(): Date | undefined {
-    return this.endDate;
-  }
-  public set endDateField(value: Date | undefined) {
-    this.endDate = value;
-    this.endDateChange.emit(value);
-  }
-
   @Output() public enlargeYCallback = new EventEmitter<void>();
   @Output() public shrinkYCallback = new EventEmitter<void>();
   @Output() public enlargeXCallback = new EventEmitter<void>();

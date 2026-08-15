@@ -12,6 +12,9 @@ import {
   catchError,
   throwError,
   map,
+  switchMap,
+  debounceTime,
+  distinctUntilChanged,
 } from 'rxjs';
 import { CardAndInput } from '../../models/card-and-input.model';
 import { CardAndOutput } from '../../models/card-and-output.model';
@@ -95,12 +98,12 @@ export class StrategyManagerCanvasComponent implements OnInit {
     }
 
     this.initialized.next(0);
-    this.initialized.next(this.canvas.cards.length);
 
     this.initSub = this.initialized.subscribe((value) => {
       if (value === 0) {
         this.initSub?.unsubscribe();
         for (let card of this.canvas.cards) {
+          this.initialized.next(this.initialized.value + 1);
           if (card.pointsFromCards) {
             for (let pointer of card.pointsFromCards) {
               const otherCard = guidCardMap.get(pointer.from!)!;
@@ -298,14 +301,18 @@ export class StrategyManagerCanvasComponent implements OnInit {
     this.canvas.cards.push(clone);
   }
   onSubmit() {
-    this.getSaveCanvas().subscribe({
-      next: (canvas) => {
-        this.processNewCanvas(canvas);
-      },
-    });
+    this.getSaveCanvas()
+      .pipe(
+        debounceTime(300),
+        switchMap((canvas) => {
+          this.processNewCanvas(canvas);
+          return of(canvas);
+        }),
+      )
+      .subscribe();
   }
 
-  processNewCanvas(canvas: StockCanvasDto) {
+  processNewCanvas(canvas: StockCanvasDto): void {
     this.isDirty = false;
     if (this.urlParam) {
       this.canvas = {
@@ -316,17 +323,9 @@ export class StrategyManagerCanvasComponent implements OnInit {
         cards: [],
       };
 
-      this.initialized.next(0);
-      this.initialized.next(canvas.cards.length);
-
       this.canvas.cards = [];
 
-      this.initSub = this.initialized.subscribe((value) => {
-        if (value === 0) {
-          this.initSub?.unsubscribe();
-          this.initializeView(canvas);
-        }
-      });
+      this.initializeView(canvas);
     } else {
       this.router.navigate(['/strategy-manager/canvas', canvas.id]);
     }
