@@ -1,1 +1,23 @@
-<p>stock-manager-stock-symbol-create works!</p>
+<form
+  class="panel-form"
+  [formGroup]="createForm"
+  (ngSubmit)="createStockSymbol()"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Symbol</mat-label>
+    <input matInput formControlName="symbol" autocomplete="off" />
+    @if (createForm.controls.symbol.hasError("required")) {
+      <mat-error>Symbol is required.</mat-error>
+    } @else if (createForm.controls.symbol.hasError("maxlength")) {
+      <mat-error>Symbol must be 20 characters or fewer.</mat-error>
+    }
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit" [disabled]="isCreating">
+    {{ isCreating ? "Creating..." : "Create" }}
+  </button>
+</form>
+
+@if (createdStockSymbol) {
+  <p class="success-message">Created {{ createdStockSymbol.symbol }}.</p>
+}

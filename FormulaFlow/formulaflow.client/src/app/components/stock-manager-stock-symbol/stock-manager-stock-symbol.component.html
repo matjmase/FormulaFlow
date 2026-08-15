@@ -1,1 +1,25 @@
-<p>stock-manager-stock-symbol works!</p>
+<mat-accordion class="stock-symbol-panels" multi>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Read Stock Symbols</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-stock-manager-stock-symbol-read></app-stock-manager-stock-symbol-read>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Create Stock Symbol</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-stock-manager-stock-symbol-create></app-stock-manager-stock-symbol-create>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Delete Stock Symbol</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-stock-manager-stock-symbol-delete></app-stock-manager-stock-symbol-delete>
+  </mat-expansion-panel>
+</mat-accordion>

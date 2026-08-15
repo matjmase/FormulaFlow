@@ -1,0 +1,27 @@
+.stock-symbol-panels {
+  display: block;
+  width: 100%;
+}
+
+.panel-form button {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.result-summary,
+.empty-state,
+.success-message {
+  color: var(--mat-sys-on-surface-variant);
+  margin: 0;
+}
+
+.symbol {
+  font: var(--mat-sys-title-small);
+}

@@ -37,7 +37,7 @@ namespace FormulaFlow.Server.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var paged = await _service.GetPagedAsync(page - 1, pageSize);
+            var paged = await _service.GetPagedAsync(page, pageSize);
             return Ok(paged);
         }
 

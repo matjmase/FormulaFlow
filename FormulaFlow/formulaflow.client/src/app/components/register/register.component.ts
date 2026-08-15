@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -16,6 +16,7 @@ import { SessionLocalStorageService } from '../../services/session-local-storage
   standalone: false,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class RegisterComponent {
   private readonly formBuilder = inject(FormBuilder);

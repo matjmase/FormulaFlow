@@ -1,4 +1,7 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { StockDataEntryApiService } from './stock-data-entry-api.service';
@@ -59,7 +62,7 @@ describe('StockDataEntryApiService', () => {
 
     service
       .getPaged({
-        page: 1,
+        page: 0,
         pageSize: 20,
         stockSymbolId: stockDataEntry.stockSymbolId,
         startDate: '2026-01-01T00:00:00.000Z',
@@ -92,9 +95,11 @@ describe('StockDataEntryApiService', () => {
       collisionBehavior: UploadFileModelDtoCollisionBehavior.SkipExisting,
     };
 
-    service.uploadFile(stockDataEntry.stockSymbolId, file, model).subscribe((result) => {
-      expect(result).toBeNull();
-    });
+    service
+      .uploadFile(stockDataEntry.stockSymbolId, file, model)
+      .subscribe((result) => {
+        expect(result).toBeNull();
+      });
 
     const req = httpMock.expectOne(
       `/api/StockDataEntry/${stockDataEntry.stockSymbolId}`,

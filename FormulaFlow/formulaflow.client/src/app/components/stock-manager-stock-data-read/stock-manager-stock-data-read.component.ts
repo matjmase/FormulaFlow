@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { finalize } from 'rxjs';
@@ -11,6 +16,7 @@ import { StockDataEntryApiService } from '../../services/api/stock-data-entry-ap
   standalone: false,
   templateUrl: './stock-manager-stock-data-read.component.html',
   styleUrl: './stock-manager-stock-data-read.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class StockManagerStockDataReadComponent implements OnInit {
   private readonly stockDataEntryApiService = inject(StockDataEntryApiService);
@@ -40,7 +46,7 @@ export class StockManagerStockDataReadComponent implements OnInit {
 
     this.stockDataEntryApiService
       .getPaged({
-        page: pageIndex + 1,
+        page: pageIndex,
         pageSize,
       })
       .pipe(finalize(() => (this.isReading = false)))

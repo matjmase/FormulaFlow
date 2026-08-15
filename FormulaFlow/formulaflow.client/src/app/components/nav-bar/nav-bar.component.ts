@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticationApiService } from '../../services/api/authentication-api.service';
@@ -9,6 +9,7 @@ import { SessionLocalStorageService } from '../../services/session-local-storage
   standalone: false,
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class NavBarComponent implements OnInit {
   public readonly rippleColor = 'rgba(0, 0, 0, 0.4)';

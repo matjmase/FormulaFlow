@@ -52,7 +52,7 @@ namespace FormulaFlow.Server.Controllers
                 (endDate == null || entity.Date <= endDate);
 
 
-            var paged = await _service.GetPagedAsync(page - 1, pageSize, filter);
+            var paged = await _service.GetPagedAsync(page, pageSize, filter);
             return Ok(paged);
         }
 

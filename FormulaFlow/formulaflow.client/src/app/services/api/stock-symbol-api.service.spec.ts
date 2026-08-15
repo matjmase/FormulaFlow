@@ -1,4 +1,7 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { StockSymbolApiService } from './stock-symbol-api.service';
@@ -51,7 +54,7 @@ describe('StockSymbolApiService', () => {
       totalPages: 1,
     };
 
-    service.getPaged(1, 10).subscribe((result) => {
+    service.getPaged(0, 10).subscribe((result) => {
       expect(result).toEqual(paged);
     });
 
@@ -79,9 +82,11 @@ describe('StockSymbolApiService', () => {
   });
 
   it('should update a stock symbol', () => {
-    service.update(stockSymbol.id as string, stockSymbol).subscribe((result) => {
-      expect(result).toEqual(stockSymbol);
-    });
+    service
+      .update(stockSymbol.id as string, stockSymbol)
+      .subscribe((result) => {
+        expect(result).toEqual(stockSymbol);
+      });
 
     const req = httpMock.expectOne(`/api/StockSymbol/${stockSymbol.id}`);
     expect(req.request.method).toBe('PUT');

@@ -1,0 +1,52 @@
+.column-fields {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.file-label,
+.file-name,
+.success-message {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.file-label {
+  font: var(--mat-sys-body-small);
+}
+
+.file-input {
+  display: none;
+}
+
+.file-name {
+  overflow-wrap: anywhere;
+}
+
+.file-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 560px;
+  padding-top: 16px;
+}
+
+.panel-form button {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.success-message {
+  margin: 12px 0 0;
+}
+
+@media (max-width: 640px) {
+  .column-fields {
+    grid-template-columns: 1fr;
+  }
+}

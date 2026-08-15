@@ -1,1 +1,48 @@
-<p>stock-manager-stock-symbol-delete works!</p>
+<form
+  class="panel-form"
+  [formGroup]="deleteForm"
+  (ngSubmit)="deleteStockSymbol()"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Stock symbol</mat-label>
+    <input
+      matInput
+      formControlName="stockSymbol"
+      autocomplete="off"
+      [matAutocomplete]="stockSymbolAutocomplete"
+    />
+    <mat-autocomplete
+      #stockSymbolAutocomplete="matAutocomplete"
+      [displayWith]="displayStockSymbol"
+    >
+      @for (
+        stockSymbol of filteredStockSymbols$ | async;
+        track stockSymbol.id
+      ) {
+        <mat-option [value]="stockSymbol">
+          {{ stockSymbol.symbol }}
+        </mat-option>
+      }
+    </mat-autocomplete>
+    @if (deleteForm.controls.stockSymbol.hasError("required")) {
+      <mat-error>Stock symbol is required.</mat-error>
+    } @else if (
+      deleteForm.controls.stockSymbol.hasError("stockSymbolSelection")
+    ) {
+      <mat-error>Select a stock symbol from the list.</mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    mat-flat-button
+    color="warn"
+    type="submit"
+    [disabled]="isDeleting || isLoadingStockSymbols"
+  >
+    {{ isDeleting ? "Deleting..." : "Delete" }}
+  </button>
+</form>
+
+@if (deletedStockSymbol) {
+  <p class="success-message">Deleted {{ deletedStockSymbol.symbol }}.</p>
+}

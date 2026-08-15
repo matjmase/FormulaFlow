@@ -1,1 +1,24 @@
-<p>stock-manager-stock-symbol-read works!</p>
+@if (stockSymbols) {
+  <div class="result-list">
+    @if (stockSymbols.record.length > 0) {
+      @for (stockSymbol of stockSymbols.record; track stockSymbol.id) {
+        <div class="symbol-row">
+          <span class="symbol">{{ stockSymbol.symbol }}</span>
+        </div>
+      }
+    } @else {
+      <p class="empty-state">No stock symbols found.</p>
+    }
+  </div>
+}
+
+<mat-paginator
+  [length]="stockSymbols?.recordCount ?? 0"
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [disabled]="isReading"
+  showFirstLastButtons
+  aria-label="Select stock symbol page"
+  (page)="onPageChange($event)"
+></mat-paginator>
