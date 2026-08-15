@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="tall-toolbar">
   <div style="display: flex">
     <span class="double-button">
       <span>
@@ -38,12 +38,10 @@
   </div>
   <span class="spacer"></span>
 
-  <div>
-    <mat-form-field appearance="outline" class="tall-form-field">
-      <mat-label>Network Name</mat-label>
-      <input matInput [(ngModel)]="canvasNameField" />
-    </mat-form-field>
+  <mat-form-field appearance="outline" class="tall-form-field">
+    <mat-label>Network Name</mat-label>
+    <input matInput [(ngModel)]="canvasNameField" />
+  </mat-form-field>
 
-    <button mat-button (click)="onSubmit()">Submit</button>
-  </div>
+  <button mat-button (click)="onSubmit()">Submit</button>
 </mat-toolbar>
