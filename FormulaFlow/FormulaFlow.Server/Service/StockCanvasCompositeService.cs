@@ -95,8 +95,16 @@ namespace FormulaFlow.Server.Service
                     Order = link.Order,
                 });
 
+                var dtoParams = new List<StockParameterDto>();
+
                 var parameters = await _unitOfWork.Parameters.GetAllAsync(para => para.NetworkCardId == cardDto.Id);
-                cardDto.Parameters = parameters.Select(para => _parameterMapperOut2.Map(_parameterMapperOut1.Map(para)));
+
+                foreach (var para in parameters)
+                {
+                    dtoParams.Add(_parameterMapperOut2.Map(_parameterMapperOut1.Map(para)));
+                }
+
+                cardDto.Parameters = dtoParams;
             }
 
             return canvasDto;

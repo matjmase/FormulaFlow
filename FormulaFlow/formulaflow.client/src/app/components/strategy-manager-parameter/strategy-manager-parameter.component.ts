@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { NetworkParameterType } from '../../models/network-parameter-type.model';
 import { StockParameterDto } from '../../models/stock-parameter-dto.model';
@@ -10,6 +17,7 @@ import { StockSymbolApiService } from '../../services/api/stock-symbol-api.servi
   standalone: false,
   templateUrl: './strategy-manager-parameter.component.html',
   styleUrl: './strategy-manager-parameter.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class StrategyManagerParameterComponent implements OnInit {
   @Input() public model!: StockParameterDto;

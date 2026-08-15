@@ -172,17 +172,6 @@ export class StrategyManagerCanvasComponent implements OnInit {
     card: StockCardDto,
   ): Observable<HttpResponse<Blob>> {
     return of(new HttpResponse<Blob>());
-
-    // if (this.startDate && this.endDate) {
-    //   const start = this.convertToUtcDate(this.startDate);
-    //   const end = this.convertToUtcDate(this.endDate);
-
-    //   return this.backTestService.post(card.id, start, end);
-    // } else {
-    //   throw new Error(
-    //     'Start date and end date must be defined to perform backtest',
-    //   );
-    // }
   }
 
   outputRemoved(model: CardAndOutput) {

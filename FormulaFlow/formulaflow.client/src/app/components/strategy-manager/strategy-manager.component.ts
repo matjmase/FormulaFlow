@@ -14,7 +14,7 @@ import { CanvasApiService } from '../../services/api/canvas-api.service';
 })
 export class StrategyManagerComponent implements OnInit {
   items: StockCanvasSimpleDto[] = [];
-  page = 1;
+  pageIndex = 0;
   pageSize = 10;
   length = 0;
   loading = false;
@@ -31,7 +31,7 @@ export class StrategyManagerComponent implements OnInit {
 
   loadPage(): void {
     this.loading = true;
-    this.api.getPaged(this.page, this.pageSize).subscribe({
+    this.api.getPaged(this.pageIndex, this.pageSize).subscribe({
       next: (res) => {
         this.items = res.record || [];
         this.length = res.recordCount || 0;
@@ -42,7 +42,7 @@ export class StrategyManagerComponent implements OnInit {
   }
 
   pageChange(event: PageEvent): void {
-    this.page = event.pageIndex;
+    this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.loadPage();
   }

@@ -8,7 +8,13 @@ namespace FormulaFlow.Data.Enum
     {
         StockSource,
         NumericInput,
+        BooleanInput,
+        Boolean,
+        Number,
         NumberFeedback,
-        BufferInput
+        BooleanFeedback,
+        BufferInput,
+        AggregateMethod,
+        Transitional
     }
 }

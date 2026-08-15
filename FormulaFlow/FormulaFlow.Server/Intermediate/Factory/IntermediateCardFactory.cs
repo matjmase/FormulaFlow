@@ -13,8 +13,18 @@ namespace FormulaFlow.Server.Intermediate.Factory
             {
                 case NetworkCardType.DataSource:
                     return new DataSourceIntermediateCard();
+                case NetworkCardType.Aggregate:
+                    return new AggregateIntermediateCard();
+                case NetworkCardType.Number:
+                    return new NumberIntermediateCard();
+                case NetworkCardType.Boolean:
+                    return new BooleanIntermediateCard();
                 case NetworkCardType.FeedbackNumber:
                     return new NumberFeedbackIntermediateCard();    
+                case NetworkCardType.FeedbackBoolean:
+                    return new BooleanFeedbackIntermediateCard();
+                case NetworkCardType.Transitional:
+                    return new TransitionalIntermediateCard();  
                 default:
                     throw new NotImplementedException();
             }
@@ -24,8 +34,13 @@ namespace FormulaFlow.Server.Intermediate.Factory
         {
             return new IntermediateCard[]
             {
-                new DataSourceIntermediateCard(),   
+                new DataSourceIntermediateCard(),
+                new AggregateIntermediateCard(),
+                new NumberIntermediateCard(),
+                new BooleanIntermediateCard(), 
                 new NumberFeedbackIntermediateCard(),
+                new BooleanFeedbackIntermediateCard(),
+                new TransitionalIntermediateCard(),
             };
         }
     }

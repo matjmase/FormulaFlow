@@ -7,6 +7,11 @@ namespace FormulaFlow.Data.Enum
     public enum NetworkCardType
     {
         DataSource,
-        FeedbackNumber
+        Aggregate,
+        Number,
+        Boolean,
+        FeedbackNumber,
+        FeedbackBoolean,
+        Transitional
     }
 }

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
@@ -20,6 +21,7 @@ import { AutoCompleteComplexObject } from '../../../validators/auto-complete-com
   standalone: false,
   templateUrl: './stock-symbol-auto-complete.component.html',
   styleUrl: './stock-symbol-auto-complete.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

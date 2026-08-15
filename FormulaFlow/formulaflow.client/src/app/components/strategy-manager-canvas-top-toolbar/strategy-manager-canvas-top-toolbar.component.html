@@ -38,19 +38,19 @@
   </div>
   <span class="spacer"></span>
 
-  <mat-form-field appearance="outline" class="tall-form-field">
-    <mat-label>Network Name</mat-label>
-    <input matInput [(ngModel)]="canvasNameField" />
-  </mat-form-field>
+  <div>
+    <mat-form-field appearance="outline" class="tall-form-field">
+      <mat-label>Network Name</mat-label>
+      <input matInput [(ngModel)]="canvasNameField" />
+    </mat-form-field>
 
-  <button mat-button (click)="onSubmit()">Submit</button>
+    <button mat-button (click)="onSubmit()">Submit</button>
+  </div>
 </mat-toolbar>
 <mat-toolbar>
-  <span class="spacer"></span>
-
   <div class="row-flex">
     <form>
-      <mat-form-field subscriptSizing="dynamic" class="flex-expand">
+      <mat-form-field subscriptSizing="dynamic">
         <mat-label>Enter a date range</mat-label>
         <mat-date-range-input [rangePicker]="picker">
           <input
