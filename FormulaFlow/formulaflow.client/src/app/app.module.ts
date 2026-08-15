@@ -111,7 +111,7 @@ import { StockSymbolAutoCompleteComponent } from './components/common/stock-symb
     MatDatepickerModule,
     MatTooltipModule,
   ],
-  providers: [],
+  providers: [provideNativeDateAdapter()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
