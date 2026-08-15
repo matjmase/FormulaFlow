@@ -1,0 +1,36 @@
+.empty-state {
+  color: var(--mat-sys-on-surface-variant);
+  margin: 0;
+}
+
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.stock-data-amount {
+  font: var(--mat-sys-title-small);
+}
+
+.stock-data-date {
+  display: block;
+  font: var(--mat-sys-title-small);
+}
+
+.stock-data-row {
+  align-items: center;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 8px;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.stock-symbol-id {
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-small);
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,91 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="over" [(opened)]="sidenavOpen" class="sidenav">
+    <nav class="sidenav-nav">
+      <div *appAuthenticatedIf="true">
+        @for (link of authenticatedLinks; track $index) {
+          <button mat-button (click)="closeSidenav()" [routerLink]="[link.url]">
+            <mat-icon>{{ link.icon }}</mat-icon>
+            <span>{{ link.label }}</span>
+          </button>
+        }
+      </div>
+      <div *appAuthenticatedIf="false">
+        @for (link of unAuthenticatedLinks; track $index) {
+          <button mat-button (click)="closeSidenav()" [routerLink]="[link.url]">
+            <mat-icon>{{ link.icon }}</mat-icon>
+            <span>{{ link.label }}</span>
+          </button>
+        }
+      </div>
+      <button mat-button *appAuthenticatedIf="true" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="navbar">
+      <button
+        [routerLink]="['/']"
+        mat-icon-button
+        (click)="toggleSidenav()"
+        class="menu-button"
+      >
+        <mat-icon class="nav-link-button-icon">menu</mat-icon>
+      </button>
+
+      <button
+        mat-button
+        mat-ripple
+        [matRippleColor]="rippleColor"
+        [routerLink]="['/']"
+      >
+        <span class="brand">Formula Flow</span>
+      </button>
+
+      <!-- <span class="spacer"></span> -->
+
+      <nav class="nav-links">
+        <div *appAuthenticatedIf="true" class="nav-links">
+          @for (link of authenticatedLinks; track $index) {
+            <button
+              mat-button
+              mat-ripple
+              [matRippleColor]="rippleColor"
+              [routerLink]="[link.url]"
+            >
+              <mat-icon class="nav-link-button-icon">{{ link.icon }}</mat-icon>
+              <span class="nav-link-button-text">{{ link.label }}</span>
+            </button>
+          }
+        </div>
+        <div *appAuthenticatedIf="false" class="nav-links">
+          @for (link of unAuthenticatedLinks; track $index) {
+            <button
+              mat-button
+              mat-ripple
+              [matRippleColor]="rippleColor"
+              [routerLink]="[link.url]"
+            >
+              <mat-icon class="nav-link-button-icon">{{ link.icon }}</mat-icon>
+              <span class="nav-link-button-text">{{ link.label }}</span>
+            </button>
+          }
+        </div>
+        <button
+          mat-button
+          mat-ripple
+          [matRippleColor]="rippleColor"
+          *appAuthenticatedIf="true"
+          (click)="logout()"
+        >
+          <mat-icon class="nav-link-button-icon">logout</mat-icon>
+          <span class="nav-link-button-text">Logout</span>
+        </button>
+      </nav>
+    </mat-toolbar>
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

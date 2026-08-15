@@ -1,0 +1,37 @@
+@if (stockDataEntries) {
+  <div class="result-list">
+    @if (stockDataEntries.record.length > 0) {
+      @for (
+        stockDataEntry of stockDataEntries.record;
+        track stockDataEntry.id
+      ) {
+        <div class="stock-data-row">
+          <div>
+            <span class="stock-data-date">
+              {{ stockDataEntry.date | date: "mediumDate" }}
+            </span>
+            <span class="stock-symbol-id">
+              {{ stockDataEntry.stockSymbolId }}
+            </span>
+          </div>
+          <span class="stock-data-amount">
+            {{ stockDataEntry.amount | number: "1.2-2" }}
+          </span>
+        </div>
+      }
+    } @else {
+      <p class="empty-state">No stock data found.</p>
+    }
+  </div>
+}
+
+<mat-paginator
+  [length]="stockDataEntries?.recordCount ?? 0"
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [disabled]="isReading"
+  showFirstLastButtons
+  aria-label="Select stock data page"
+  (page)="onPageChange($event)"
+></mat-paginator>

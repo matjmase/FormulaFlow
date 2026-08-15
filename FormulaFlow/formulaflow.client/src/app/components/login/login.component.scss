@@ -1,0 +1,21 @@
+.register-page {
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+mat-card-actions {
+  padding: 0 16px 16px;
+}

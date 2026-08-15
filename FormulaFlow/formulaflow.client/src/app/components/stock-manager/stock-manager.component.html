@@ -1,0 +1,25 @@
+<main class="stock-manager-page">
+  <mat-card class="stock-manager-card">
+    <mat-card-header>
+      <mat-card-title>Stock Manager</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-tab-group animationDuration="200ms">
+        <mat-tab label="Stock Symbol">
+          <section class="tab-content">
+            <h2>Stock Symbol</h2>
+            <app-stock-manager-stock-symbol></app-stock-manager-stock-symbol>
+          </section>
+        </mat-tab>
+
+        <mat-tab label="Stock Data">
+          <section class="tab-content">
+            <h2>Stock Data</h2>
+            <app-stock-manager-stock-data></app-stock-manager-stock-data>
+          </section>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</main>

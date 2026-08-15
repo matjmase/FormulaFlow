@@ -1,0 +1,110 @@
+@use "../../../variables";
+
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+  padding: 16px;
+}
+
+.sidenav-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidenav-nav button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.navbar {
+  padding: 0 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: variables.$navBarHeight;
+  z-index: 10;
+  color: var(--surface);
+  background-color: var(--dark);
+}
+
+.menu-button {
+  margin-right: 16px;
+}
+
+.brand {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--surface);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-link-button-text {
+  color: var(--surface);
+}
+
+.nav-link-button-icon {
+  color: var(--accent);
+}
+
+/* Collapse link text by default, show only icons. */
+.nav-links {
+  flex-grow: 1;
+  justify-content: end;
+}
+
+.nav-links button {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links .nav-link-button-text {
+  display: inline-block;
+  max-width: 0; /* collapsed */
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    max-width 800ms ease,
+    opacity 800ms ease,
+    margin 800ms ease;
+  opacity: 0;
+  margin-left: 0;
+  vertical-align: middle;
+}
+
+/* Expand the text when hovering the icon, and also when hovering the button for usability. */
+.nav-links button mat-icon:hover + .nav-link-button-text,
+.nav-links button:hover .nav-link-button-text {
+  max-width: 220px;
+  opacity: 1;
+  margin-left: 6px;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .menu-button {
+    display: none;
+  }
+}

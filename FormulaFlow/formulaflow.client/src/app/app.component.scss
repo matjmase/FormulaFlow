@@ -1,14 +1,12 @@
-﻿:host {
-    max-width: 1280px;
-    padding: 2rem;
-    text-align: center;
-}
+﻿@use "../variables";
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-table {
-    margin: 0 auto;
+.main-content {
+  margin-top: variables.$navBarHeight;
+  padding-top: variables.$standardMargin;
+  max-height: calc(100vh - variables.$navBarHeight - variables.$standardMargin);
+  height: calc(100vh - variables.$navBarHeight - variables.$standardMargin);
+  padding-left: 8vw;
+  padding-right: 8vw;
+  background-color: var(--surface);
+  overflow-y: auto;
 }
