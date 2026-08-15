@@ -46,3 +46,7 @@ body {
   --surface: #fafafa;
   --outline: #e0e0e0;
 }
+
+.multiline-tooltip .mat-mdc-tooltip-surface {
+  white-space: pre-line;
+}
