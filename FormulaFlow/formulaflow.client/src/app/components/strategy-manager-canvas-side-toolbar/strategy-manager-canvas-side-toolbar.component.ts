@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -34,6 +35,28 @@ export class StrategyManagerCanvasSideToolbarComponent implements OnInit {
     CardIoDataType.Boolean,
     CardIoDataType.Number,
   ];
+
+  @Input() public startDate: Date | undefined;
+  @Output() public startDateChange = new EventEmitter<Date>();
+
+  public get startDateField(): Date | undefined {
+    return this.startDate;
+  }
+  public set startDateField(value: Date | undefined) {
+    this.startDate = value;
+    this.startDateChange.emit(value);
+  }
+
+  @Input() public endDate: Date | undefined;
+  @Output() public endDateChange = new EventEmitter<Date>();
+
+  public get endDateField(): Date | undefined {
+    return this.endDate;
+  }
+  public set endDateField(value: Date | undefined) {
+    this.endDate = value;
+    this.endDateChange.emit(value);
+  }
 
   public noneInput = CardIoDataType.None;
   public boolInput = CardIoDataType.Boolean;

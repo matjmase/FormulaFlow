@@ -1,10 +1,11 @@
 @if (model.toolTip) {
   <button
-    class="multiline-tooltip"
+    style="white-space: pre-line"
     mat-icon-button
     tabindex="-1"
     [matTooltip]="model.toolTip"
-    matTooltipClass="multiline-tooltip"
+    matTooltipPosition="left"
+    matTooltipClass="my-tooltip"
     matTooltipPosition="above"
     aria-hidden="true"
   >
@@ -19,7 +20,46 @@
       (symboldIdChanged)="stockSymbolIdConverter($event); setDirty()"
     ></app-stock-symbol-auto-complete>
   }
-
+  @case (numericInput) {
+    <mat-form-field class="wide-text-area-header">
+      <mat-label>
+        {{ model.description }}
+      </mat-label>
+      <input
+        matInput
+        required
+        type="number"
+        [ngModel]="model.value"
+        (ngModelChange)="model.value = $event.toString(); setDirty()"
+      />
+    </mat-form-field>
+  }
+  @case (bufferInput) {
+    <mat-form-field class="wide-text-area-header">
+      <mat-label>
+        {{ model.description }}
+      </mat-label>
+      <input
+        matInput
+        required
+        type="number"
+        [ngModel]="model.value"
+        (ngModelChange)="model.value = $event.toString(); setDirty()"
+      />
+    </mat-form-field>
+  }
+  @case (aggregateMethodType) {
+    <mat-form-field appearance="fill" class="wide-text-area-header">
+      <mat-label>Aggregate Method</mat-label>
+      <mat-select [(ngModel)]="model.value" (ngModelChange)="setDirty()">
+        <mat-option [value]="aggregateSummation">Summation</mat-option>
+        <mat-option [value]="aggregateAverage">Average</mat-option>
+        <mat-option [value]="aggregateMultiplicative"
+          >Multiplicative</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  }
   @default {
     <mat-form-field class="wide-text-area-header">
       <mat-label>

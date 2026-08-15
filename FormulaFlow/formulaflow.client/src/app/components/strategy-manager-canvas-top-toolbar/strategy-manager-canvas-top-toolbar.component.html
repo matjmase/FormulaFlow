@@ -47,35 +47,3 @@
     <button mat-button (click)="onSubmit()">Submit</button>
   </div>
 </mat-toolbar>
-<mat-toolbar>
-  <div class="row-flex">
-    <form>
-      <mat-form-field subscriptSizing="dynamic">
-        <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input
-            id="startDate"
-            name="startDate"
-            matStartDate
-            placeholder="Start date"
-            [(ngModel)]="startDateField"
-          />
-          <input
-            id="endDate"
-            name="endDate"
-            matEndDate
-            placeholder="End date"
-            [(ngModel)]="endDateField"
-          />
-        </mat-date-range-input>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>
-    </form>
-  </div>
-
-  <span class="spacer"></span>
-</mat-toolbar>

@@ -11,6 +11,7 @@ import { NetworkParameterType } from '../../models/network-parameter-type.model'
 import { StockParameterDto } from '../../models/stock-parameter-dto.model';
 import { StockSymbolDto } from '../../models/stock-symbol-dto.model';
 import { StockSymbolApiService } from '../../services/api/stock-symbol-api.service';
+import { AggregateMethodIntermediateParameterType } from '../../models/aggregate-method-intermediate-parameter-type';
 
 @Component({
   selector: 'app-strategy-manager-parameter',
@@ -26,6 +27,18 @@ export class StrategyManagerParameterComponent implements OnInit {
   public selectedSymbol: StockSymbolDto | null = null;
 
   public stockSourceType = NetworkParameterType.StockSource;
+  public numberType = NetworkParameterType.Number;
+  public transitionalType = NetworkParameterType.Transitional;
+  public booleanType = NetworkParameterType.Boolean;
+  public numericInput = NetworkParameterType.NumericInput;
+  public aggregateMethodType = NetworkParameterType.AggregateMethod;
+  public bufferInput = NetworkParameterType.BufferInput;
+
+  public aggregateAverage = AggregateMethodIntermediateParameterType.Average;
+  public aggregateMultiplicative =
+    AggregateMethodIntermediateParameterType.Multiplicative;
+  public aggregateSummation =
+    AggregateMethodIntermediateParameterType.Summation;
 
   constructor(private symbolService: StockSymbolApiService) {}
 

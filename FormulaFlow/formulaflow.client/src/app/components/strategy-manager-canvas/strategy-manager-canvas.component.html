@@ -9,14 +9,14 @@
       (enlargeYCallback)="enlargeY()"
       (shrinkYCallback)="shrinkY()"
       [(canvasName)]="canvas.name"
-      [(startDate)]="startDate"
-      [(endDate)]="endDate"
     ></app-strategy-manager-canvas-top-toolbar>
     <div style="min-height: 0">
       <div style="display: flex; flex-direction: row; height: 100%">
         <div class="stretch-vertical canvas-toolbar">
           <app-strategy-manager-canvas-side-toolbar
             (cardSelected)="instantiateCard($event)"
+            [(startDate)]="startDate"
+            [(endDate)]="endDate"
           ></app-strategy-manager-canvas-side-toolbar>
         </div>
         <div

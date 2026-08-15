@@ -11,6 +11,7 @@ import {
   tap,
   catchError,
   throwError,
+  map,
 } from 'rxjs';
 import { CardAndInput } from '../../models/card-and-input.model';
 import { CardAndOutput } from '../../models/card-and-output.model';
@@ -22,6 +23,7 @@ import { NetworkProgrammerCardInput } from '../../models/strategy-manager-card-i
 import { NetworkProgrammerCardOutput } from '../../models/strategy-manager-card-output.model';
 import { CanvasComplexApiService } from '../../services/api/canvas-complex-api.service';
 import { StrategyManagerCanvasState } from './strategy-manager-canvas-state';
+import { BackTestApiService } from '../../services/api/back-test-api.service';
 
 @Component({
   selector: 'app-strategy-manager-canvas',
@@ -65,6 +67,7 @@ export class StrategyManagerCanvasComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private canvasService: CanvasComplexApiService,
+    private backTestService: BackTestApiService,
     private snackBar: MatSnackBar,
   ) {}
 
@@ -141,21 +144,17 @@ export class StrategyManagerCanvasComponent implements OnInit {
     }
 
     observable.subscribe((response) => {
-      this.processBlobResponse(response);
+      this.processBlobResponse(response, card);
     });
   }
 
-  private processBlobResponse(response: HttpResponse<Blob>) {
-    const contentDisposition = response.headers.get('Content-Disposition');
+  private processBlobResponse(
+    response: HttpResponse<Blob>,
+    card: StockCardDto,
+  ) {
+    const name = card.name ?? '';
 
-    let filename = 'download';
-
-    if (contentDisposition) {
-      const match = contentDisposition.match(/filename="?([^"]+)"?/);
-      if (match?.[1]) {
-        filename = match[1];
-      }
-    }
+    let filename = name + '.csv';
 
     const blob = response.body!;
     const url = window.URL.createObjectURL(blob);
@@ -171,6 +170,11 @@ export class StrategyManagerCanvasComponent implements OnInit {
   private getBackTestObservable(
     card: StockCardDto,
   ): Observable<HttpResponse<Blob>> {
+    if (card.id && this.startDate && this.endDate) {
+      return this.backTestService
+        .run(card.id, this.startDate, this.endDate)
+        .pipe(map((val) => new HttpResponse({ body: val })));
+    }
     return of(new HttpResponse<Blob>());
   }
 
