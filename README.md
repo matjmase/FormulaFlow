@@ -60,3 +60,15 @@ Update the database connection in the following files to hit your SQL Server.
 2. `FormulaFlow\FormulaFlow\FormulaFlow.Server\appsettings.json`
 
 After that, the application should run. (Given you have the basic technologies install - .Net, Node.js, Angular CLI)
+
+# TODO - Future Improvements
+
+The application can fail in a multitude of ways during the backtesting portion.
+
+## Custom Exceptions and Frontend notification
+
+I need to make a series of different exceptions that all pertain to different fail instances of the backtesting process. I will then catch the different exceptions and relay the issue with the network fail or the data not lining up to the frontend.
+
+## Clearly Define how the application buffers
+
+I need to make an addition to the user interface that conveys how many data points the card will `look back` at. For example, the Aggregate card calls for the algorithm to `look back` at x - 1 data points (the 1 represents today). Additionally, it would be nice to make the network automatically sum the total data points that will be `looked back at` at that specific stage of the network. This portion of development is unrefined and somewhat nebulous right now, but I will work on it in the future.
