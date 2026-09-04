@@ -1,5 +1,5 @@
 export enum AggregateMethodIntermediateParameterType {
-  Summation,
-  Average,
-  Multiplicative,
+  Summation = 'Summation',
+  Average = 'Average',
+  Multiplicative = 'Multiplicative',
 }

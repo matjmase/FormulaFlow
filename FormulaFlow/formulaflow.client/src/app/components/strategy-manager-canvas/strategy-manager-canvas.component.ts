@@ -98,12 +98,12 @@ export class StrategyManagerCanvasComponent implements OnInit {
     }
 
     this.initialized.next(0);
+    this.initialized.next(this.canvas.cards.length);
 
     this.initSub = this.initialized.subscribe((value) => {
       if (value === 0) {
         this.initSub?.unsubscribe();
         for (let card of this.canvas.cards) {
-          this.initialized.next(this.initialized.value + 1);
           if (card.pointsFromCards) {
             for (let pointer of card.pointsFromCards) {
               const otherCard = guidCardMap.get(pointer.from!)!;
@@ -298,7 +298,7 @@ export class StrategyManagerCanvasComponent implements OnInit {
       (this.scrollX + this.canvasWidth / 2) / this.canvas.scale!,
     );
 
-    this.canvas.cards.push(clone);
+    this.canvas.cards = [...this.canvas.cards, clone];
   }
   onSubmit() {
     this.getSaveCanvas()
