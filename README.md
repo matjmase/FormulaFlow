@@ -8,7 +8,7 @@ This application utilizes a dual architecture. A standard architecture is used f
 
 <img src="https://github.com/matjmase/FormulaFlow/blob/main/Screenshots/IntermediateCardPic.jpg" width="600" />
 
-<img src="https://github.com/matjmase/FormulaFlow/blob/main/Screenshots/SplitArchitecture.jpg" width="600" />
+<img src="https://github.com/matjmase/FormulaFlow/blob/main/Screenshots/SplitArchitecture.jpg" width="300" />
 
 # Data Injection
 
