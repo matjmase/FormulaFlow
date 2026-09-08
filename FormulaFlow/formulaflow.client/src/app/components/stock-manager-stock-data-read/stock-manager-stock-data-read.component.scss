@@ -6,8 +6,12 @@
   margin-top: 16px;
 
   mat-form-field {
-    flex: 1 1 240px;
-    min-width: 0;
+    flex-grow: 1;
+    min-width: 200px;
+  }
+
+  .filter-button-holder {
+    flex-basis: 100%;
   }
 }
 
