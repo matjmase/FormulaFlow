@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -27,6 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { authenticationInterceptor } from './interceptors/authentication.interceptor';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -87,7 +88,6 @@ import { StockSymbolAutoCompleteComponent } from './components/common/stock-symb
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -111,7 +111,13 @@ import { StockSymbolAutoCompleteComponent } from './components/common/stock-symb
     MatDatepickerModule,
     MatTooltipModule,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [
+    provideNativeDateAdapter(),
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withInterceptors([authenticationInterceptor]),
+    ),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
