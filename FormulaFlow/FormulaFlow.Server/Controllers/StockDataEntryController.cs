@@ -36,7 +36,7 @@ namespace FormulaFlow.Server.Controllers
 
         [HttpGet]
         public async Task<ActionResult<PagedData<StockDataEntryDto>>> GetPaged(
-            [FromQuery, BindRequired] int page,
+            [FromQuery, BindRequired] int pageIndex,
             [FromQuery, BindRequired] int pageSize,
             [FromQuery] Guid? stockSymbolId,
             [FromQuery] DateTimeOffset? startDate,
@@ -52,7 +52,7 @@ namespace FormulaFlow.Server.Controllers
                 (endDate == null || entity.Date <= endDate);
 
 
-            var paged = await _service.GetPagedAsync(page, pageSize, filter);
+            var paged = await _service.GetPagedAsync(pageIndex, pageSize, filter);
             return Ok(paged);
         }
 

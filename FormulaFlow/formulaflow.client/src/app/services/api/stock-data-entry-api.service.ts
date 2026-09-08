@@ -19,9 +19,11 @@ export class StockDataEntryApiService {
     });
   }
 
-  public getPaged(options: StockDataEntryPagedOptions): Observable<PagedData<StockDataEntryDto>> {
+  public getPaged(
+    options: StockDataEntryPagedOptions,
+  ): Observable<PagedData<StockDataEntryDto>> {
     let params = new HttpParams()
-      .set('page', options.page)
+      .set('pageIndex', options.pageIndex)
       .set('pageSize', options.pageSize);
 
     if (options.stockSymbolId) {
@@ -29,7 +31,10 @@ export class StockDataEntryApiService {
     }
 
     if (options.startDate) {
-      params = params.set('startDate', this.toDateQueryValue(options.startDate));
+      params = params.set(
+        'startDate',
+        this.toDateQueryValue(options.startDate),
+      );
     }
 
     if (options.endDate) {
@@ -62,7 +67,7 @@ export class StockDataEntryApiService {
 }
 
 export interface StockDataEntryPagedOptions {
-  page: number;
+  pageIndex: number;
   pageSize: number;
   stockSymbolId?: string;
   startDate?: Date | string;

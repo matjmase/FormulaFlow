@@ -1,3 +1,42 @@
+<form class="filter-form" #filterForm="ngForm" (ngSubmit)="filterForm.valid && applyFilters()">
+  <mat-form-field appearance="outline">
+    <mat-label>Stock Symbol</mat-label>
+    <mat-select name="stockSymbolId" [ngModel]="stockSymbolId"
+      (ngModelChange)="stockSymbolId = $event || undefined" [disabled]="isLoadingSymbols">
+      <mat-option [value]="undefined">All symbols</mat-option>
+      @for (stockSymbol of stockSymbols; track stockSymbol.id) {
+        <mat-option [value]="stockSymbol.id">{{ stockSymbol.symbol }}</mat-option>
+      }
+    </mat-select>
+    @if (isLoadingSymbols) { <mat-hint>Loading symbols…</mat-hint> }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Start Date</mat-label>
+    <input matInput [matDatepicker]="startDatePicker" name="startDate" [ngModel]="startDate"
+      (ngModelChange)="startDate = $event ?? undefined" />
+    <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+    <mat-error>Enter a valid start date.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>End Date</mat-label>
+    <input matInput [matDatepicker]="endDatePicker" name="endDate" [ngModel]="endDate"
+      (ngModelChange)="endDate = $event ?? undefined" />
+    <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+    <mat-error>Enter a valid end date.</mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button type="submit" [disabled]="isReading || invalidDateRange || filterForm.invalid">
+    Apply filters
+  </button>
+  @if (invalidDateRange) {
+    <p class="filter-error" role="alert">End date must be on or after start date.</p>
+  }
+</form>
+
 @if (stockDataEntries) {
   <div class="result-list">
     @if (stockDataEntries.record.length > 0) {

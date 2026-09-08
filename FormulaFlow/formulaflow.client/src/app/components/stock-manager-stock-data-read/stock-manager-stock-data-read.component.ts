@@ -1,12 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
   OnInit,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { finalize } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EMPTY, expand, finalize, reduce } from 'rxjs';
+import { StockSymbolDto } from '../../models/stock-symbol-dto.model';
+import { StockSymbolApiService } from '../../services/api/stock-symbol-api.service';
 import { PagedData } from '../../models/paged-data.model';
 import { StockDataEntryDto } from '../../models/stock-data-entry-dto.model';
 import { StockDataEntryApiService } from '../../services/api/stock-data-entry-api.service';
@@ -21,6 +25,15 @@ import { StockDataEntryApiService } from '../../services/api/stock-data-entry-ap
 export class StockManagerStockDataReadComponent implements OnInit {
   private readonly stockDataEntryApiService = inject(StockDataEntryApiService);
   private readonly snackBar = inject(MatSnackBar);
+  private readonly stockSymbolApiService = inject(StockSymbolApiService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  public stockSymbolId: string | undefined;
+  public startDate: Date | undefined;
+  public endDate: Date | undefined;
+  public stockSymbols: StockSymbolDto[] = [];
+  public isLoadingSymbols = false;
+  private filters: { stockSymbolId?: string; startDate?: Date; endDate?: Date } = {};
 
   public isReading = false;
   public pageIndex = 0;
@@ -29,7 +42,41 @@ export class StockManagerStockDataReadComponent implements OnInit {
   public stockDataEntries: PagedData<StockDataEntryDto> | null = null;
 
   public ngOnInit(): void {
+    this.readStockSymbols();
     this.readStockDataEntries();
+  }
+
+  public get invalidDateRange(): boolean {
+    return !!(this.startDate && this.endDate &&
+      new Date(this.startDate) > new Date(this.endDate));
+  }
+
+  public applyFilters(): void {
+    if (this.invalidDateRange || this.isReading) return;
+
+    this.filters = {
+      stockSymbolId: this.stockSymbolId,
+      startDate: this.startDate ? new Date(this.startDate) : undefined,
+      endDate: this.endDate ? new Date(this.endDate) : undefined,
+    };
+    this.readStockDataEntries(0);
+  }
+
+  private readStockSymbols(): void {
+    this.isLoadingSymbols = true;
+    this.stockSymbolApiService.getPaged(0, 100).pipe(
+      expand((page) => page.page + 1 < page.totalPages
+        ? this.stockSymbolApiService.getPaged(page.page + 1, page.pageSize)
+        : EMPTY),
+      reduce((symbols, page) => symbols.concat(page.record), [] as StockSymbolDto[]),
+      takeUntilDestroyed(this.destroyRef),
+      finalize(() => (this.isLoadingSymbols = false)),
+    ).subscribe({
+      next: (symbols) => { this.stockSymbols = symbols; },
+      error: () => {
+        this.snackBar.open('Unable to load stock symbols.', 'Close', { duration: 4000 });
+      },
+    });
   }
 
   public onPageChange(event: PageEvent): void {
@@ -46,7 +93,8 @@ export class StockManagerStockDataReadComponent implements OnInit {
 
     this.stockDataEntryApiService
       .getPaged({
-        page: pageIndex,
+        ...this.filters,
+        pageIndex,
         pageSize,
       })
       .pipe(finalize(() => (this.isReading = false)))
